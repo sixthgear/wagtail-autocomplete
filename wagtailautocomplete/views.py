@@ -64,7 +64,7 @@ def search(request):
         return HttpResponseBadRequest()
 
     field_name = getattr(model, 'autocomplete_search_field', 'title')
-    filter_kwargs = dict()
+    filter_kwargs = getattr(model, 'autocomplete_filters', dict())
     filter_kwargs[field_name + '__icontains'] = search_query
     queryset = model.objects.filter(**filter_kwargs)
 
